@@ -1,0 +1,31 @@
+ingress:
+  enabled: ~
+
+  web:
+    enabled: true
+    path: "/"
+    pathType: "ImplementationSpecific"
+    host: ""
+    hosts: []
+    ingressClassName: "nginx"
+
+executor: "KubernetesExecutor"
+
+config:
+  webserver:
+    expose_config: 'True'
+dags:
+  persistence:
+    enabled: true
+    size: 50Mi
+    storageClassName: local-storage
+    accessMode: ReadOnlyMany
+    existingClaim: airflow-pv-dags
+
+logs:
+  persistence:
+    enabled: true
+    size: 100Mi
+    annotations: {}
+    storageClassName: local-storage
+    existingClaim: airflow-pv-logs
